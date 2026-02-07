@@ -1,15 +1,17 @@
 [project]
-name = "<project_name>"
+name = "machine_learning"
 version = "0.1.0"
-description = "<description>"
+description = "Codes for WUST Machine Learning course. Deal with different machine learning problems."
 authors = [{name="ZiveRael", email="papeernscal@gmail.com"}]
 readme = "README.md"
 dependencies = [
     "ipykernel==6.31.0", # Vs-code extension bug https://stackoverflow.com/questions/79788502/jupyter-notebook-extension-visual-studio-code-stuck-connecting-to-kernel in 7.1.0
     "pydantic==2.12.5",
-    "tqdm==4.67.1",
+    "tqdm==4.67.2",
     "typer==0.21.1",
-    "scalene==2.1.0",
+    "scalene==2.1.3",
+    "jaxtyping>=0.3.7",
+    "scikit-learn>=1.8.0",
 ]
 requires-python=">= 3.12, <3.13"
 
@@ -31,11 +33,11 @@ dev = [
 ]
 
 [project.scripts]
-main = "<project_name>.main:app"
+main = "machine_learning.main:app"
 
 [tool.mypy]
 python_version = "3.12"
-files = ["<project_name>", "tests"]
+files = ["machine_learning", "tests"]
 
 plugins = [
     "pydantic.mypy",
@@ -53,7 +55,6 @@ module = [
 ignore_missing_imports = true
 
 
-
 [tool.ruff]
 target-version = "py312"
 exclude = ["notebooks"]
@@ -63,7 +64,7 @@ indent-width = 4
 [tool.ruff.lint]
 select = ["ALL"]
 unfixable = ["F841"]
-ignore = [ "ANN", "TD", "N803", "N805", "N806", "COM812", "ISC001", "E501", "D", "RUF002"]
+ignore = [ "ANN", "TD", "N803", "N805", "N806", "COM812", "ISC001", "D", "RUF002"]
 # Allow unused variables when underscore-prefixed.
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 

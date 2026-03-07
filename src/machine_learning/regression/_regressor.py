@@ -208,13 +208,15 @@ class GDRegressor(Regressor):
         self._coef = self.coef - self.learning_rate * self.current_gradient
 
     def _is_early_stopped(self) -> bool:
-        """There is alternative condition:
-        np.linalg.norm(self._current_gradient) < self.tolerance
-        however this not pass tests.
-        """
-        if len(self.loss_history) > 0 and (
-            abs(self.loss_history[-1] - self.loss_history[-2]) < self.tolerance
-        ):
+        """Check convergence based on change in loss."""
+        min_history_len = 2
+        if len(self.loss_history) < min_history_len:
+            return False
+        last_loss = self.loss_history[-1]
+        prev_loss = self.loss_history[-2]
+        if not np.isfinite(last_loss) or not np.isfinite(prev_loss):
+            return True
+        if abs(last_loss - prev_loss) < self.tolerance:
             if self._verbose:
                 logger.info(
                     "Converged at iteration: %s.", len(self.loss_history)

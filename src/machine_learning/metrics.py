@@ -7,7 +7,9 @@ from machine_learning.model import LossFunction, Matrix, Vector
 
 def mse(exact: Vector, predicted: Vector) -> np.floating:
     m = len(exact)
-    return (1 / (2 * m)) * np.sum((predicted - exact) ** 2)
+    diff = predicted - exact
+    diff = np.clip(diff, -1e150, 1e150)
+    return (1 / (2 * m)) * np.sum(diff * diff)
 
 
 def loss(

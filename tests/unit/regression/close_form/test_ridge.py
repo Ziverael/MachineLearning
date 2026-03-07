@@ -6,7 +6,9 @@ from sklearn.linear_model import (  # type: ignore[import-untyped]
     Ridge as SklearnRidge,
 )
 
-from machine_learning.regression.ridge import RidgeRegressor as RidgeRegression
+from machine_learning.regression.close_form.ridge import (
+    RidgeRegressor as RidgeRegression,
+)
 
 
 @pytest.mark.parametrize("alpha", np.linspace(0.0, 2.0, 10))

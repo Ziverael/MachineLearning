@@ -4,14 +4,21 @@ import numpy as np
 import pytest
 from pydantic import ValidationError
 
+from machine_learning.model import Matrix
 from machine_learning.regression import _regressor
 
 
 @pytest.fixture
 def dummy_linear_regressor():
-    class DummyLinReg(_regressor.AbstractLinearRegressor):
+    class DummyLinReg(_regressor.Regressor):
         def fit(self):
             self._coef = np.array([[10.0], [3.4]])
+
+        def _fit_prepare(self) -> None: ...
+
+        def _fit_step(self, features_matrix: Matrix) -> None: ...
+
+        def _update_coef(self) -> None: ...
 
     return DummyLinReg
 

@@ -4,7 +4,7 @@ from sklearn.linear_model import (  # type: ignore[import-untyped]
     LinearRegression as SklearnLinearRegression,
 )
 
-from machine_learning.regression.linear import (
+from machine_learning.regression.close_form.basic import (
     LinearRegressor as LinearRegression,
 )
 

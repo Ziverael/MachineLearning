@@ -353,6 +353,19 @@ Properties:
 **Why differentiability matters:**
 To train multi-layer networks, we need to compute how the error changes with respect to each weight. This requires taking derivatives through the entire network (backpropagation). Non-differentiable activation functions break this chain.
 
+**Why can't we use Heaviside for gradient descent?**
+Gradient descent requires a derivative to update weights. Derivative of Heaviside is almost everywhere equals to 0 and does not exists in discontinuity.
+
+**Where does sigmoid derivative have maximum value?**
+At $x=0$. The sigmoid learns fastest when the neuron output is uncertain (around 0.5). Learning slows abruptly when the neuron is saturated near 0 or 1.
+
+**What is the "vanishing gradient" problem?**
+In deep networks, gradients are computed using the chain rule, so multiplying many small values shrinks gradient exponentially. In saturated regions (far left/right), gradient is almost 0. In deep networks, early layers receive almost no signal. This imply that, the weights in early layers stop learning.
+
+**Why is ReLU popular in deep networks?**
+* Gradients propagate deeply without shrinking
+* Computationally simple
+Therefore this is stable for deep nets. Their arises a Dying ReLU problem, but this is mitigated by "Leaky ReLU", "ELU" or "GELU".
 ---
 
 ## 1.9 The Multi-Layer Perceptron (1986)
